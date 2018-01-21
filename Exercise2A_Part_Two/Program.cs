@@ -10,17 +10,39 @@ namespace Exercise2A_Part_Two
     {
         static void Main(string[] args)
         {
-            int i, n, t, sum = 0;
+            int i = 0;
+            int n = 0;
+            int t = 0;
+            int sum = 0;
             double avg;
-            Console.Write("How many test scores do you have? ");
-            t = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Input your test scores: ");
 
-            for (i=1; i<=t; i++)
+            Console.Write("How many test scores do you have? ");
+            t = int.Parse(Console.ReadLine());
+            if (t > 0)
+            {
+                Console.Write("Input your test scores: ");
+            }
+            else
+            {
+                Console.WriteLine("Come on, Really?  You don't at least have one score?");
+                t=1;
+            }
+
+
+            for (i = 1; i <= t;)
             {
                 Console.Write("Number - {0} : ", i);
-                n = Convert.ToInt32(Console.ReadLine());
-                sum += n;
+                n = int.Parse(Console.ReadLine());
+
+                if ((n >= 0) && (n <= 100))
+                {
+                    sum += n;
+                    i++;
+                }
+                else
+                {
+                    Console.WriteLine("Your input is invalid. Try again");
+                }
             }
             avg = sum / t;
 
@@ -28,72 +50,85 @@ namespace Exercise2A_Part_Two
 
             if (avg >= 90)
             {
-                Console.WriteLine("Your Grade is an A");
+                Console.WriteLine("Your Grade is an A\n");
             }
             else if (avg >= 80)
             {
-                Console.WriteLine("Your Grade is a B");
+                Console.WriteLine("Your Grade is a B\n");
             }
             else if (avg >= 70)
             {
-                Console.WriteLine("Your Grade is a C");
+                Console.WriteLine("Your Grade is a C\n");
             }
             else if (avg >= 60)
             {
-                Console.WriteLine("Your Grade is a D");
+                Console.WriteLine("Your Grade is a D\n");
             }
             else if (avg < 60)
             {
-                Console.WriteLine("Your Grade is a F");
+                Console.WriteLine("Your Grade is a F\n");
             }
             
 
-            i = 0;
-            n = 0;
-            t = 1;
+            i = 1;
             sum = 0;
-            string decision;
 
-            //Console.Write("How many test scores do you have? ");
-            //t = Convert.ToInt32(Console.ReadLine());
-            
-            Console.Write("Input your test scores: ");
-            
-            for (i=1; i<=t; i++)
-            {
-                Console.Write("Number - {0} : ", i);
-                n = Convert.ToInt32(Console.ReadLine());
-                sum += n;
-                Console.Write("Do you have more?  Enter Y to continue:  ");
-                decision = Console.ReadLine();
-                //???SYNTAX??? ARGH!
-            }
-            avg = sum / t;
+            Console.WriteLine("For this next one, I don't know how many test scores you have to enter\n");
+            Console.Write("Input your test scores (Input -1 when done): ");
 
-            Console.Write("The sum of your {0} tests is: {1}\nThe Average is: {2}\n", t, sum, avg);
+            var val = 0;
+            while (val != -1)
+            {
+                Console.Write("Test number - {0}: ", i);
+                val = int.Parse(Console.ReadLine());
 
-            if (avg >= 90)
-            {
-                Console.WriteLine("Your Grade is an A");
+                if ((val >= 0) && (val <= 100))
+                {
+                    sum += val;
+                    i++;
+                }
+                else if (val == -1)
+                {
+                    ;
+                }
+                else
+                {
+                    Console.WriteLine("Your input is invalid. Try again");
+                }
             }
-            else if (avg >= 80)
+            if (i > 1)
             {
-                Console.WriteLine("Your Grade is a B");
+                avg = sum / (i - 1);
+
+                Console.Write("The sum of your {0} tests is: {1}\nThe Average is: {2}\n", (i - 1), sum, avg);
+
+                if (avg >= 90)
+                {
+                    Console.WriteLine("Your Grade is an A\n");
+                }
+                else if (avg >= 80)
+                {
+                    Console.WriteLine("Your Grade is a B\n");
+                }
+                else if (avg >= 70)
+                {
+                    Console.WriteLine("Your Grade is a C\n");
+                }
+                else if (avg >= 60)
+                {
+                    Console.WriteLine("Your Grade is a D\n");
+                }
+                else if (avg < 60)
+                {
+                    Console.WriteLine("Your Grade is a F\n");
+                }
             }
-            else if (avg >= 70)
+            else
             {
-                Console.WriteLine("Your Grade is a C");
-            }
-            else if (avg >= 60)
-            {
-                Console.WriteLine("Your Grade is a D");
-            }
-            else if (avg< 60)
-            {
-                Console.WriteLine("Your Grade is a F");
+                Console.WriteLine("You need at least 1 test score for this to work correctly");
             }
 
+            Console.WriteLine("Thank you for playing, have a nice day... :)");
         }
-
     }
 }
